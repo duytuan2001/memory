@@ -131,7 +131,7 @@
   <body>
     <h1>Anh có điều muốn nói</h1>
     <!-- Thẻ audio -->
-  <audio id="background-music" src="tranbonho.mp3" loop></audio>
+  <audio id="background-music" src="tranbonho.mp3" loop autoplay muted></audio>
     <button onclick="generateRandomNotification()">Tràn bộ nhớ...</button>
     <script>
       const messages = ["Nhớ nhớ nhớ em!"];
@@ -183,6 +183,14 @@
       // Kiểm tra nếu autoplay bị chặn thì thêm sự kiện click
       audio.play().catch(() => {
         document.body.addEventListener('click', playMusic);
+      });
+    });
+     // Bật âm thanh ngay khi tải trang nếu autoplay bị chặn
+     window.addEventListener('load', () => {
+      const audio = document.getElementById('background-music');
+      audio.muted = false; // Bật âm lượng
+      audio.play().catch(error => {
+        console.warn('Autoplay bị chặn:', error);
       });
     });
     </script>
